@@ -1,0 +1,16 @@
+
+
+0! = 1
+3! = 3 * 2 * 1
+
+n! = n * (n - 1) * ... * 1
+
+1! = 1
+n! = n * (n - 1)!
+
+
+recursion
+- base case (straight up definition for a particular case or set of cases)
+- recursive case that references itself
+  - gets smaller and smaller and eventually reaches the base case
+
