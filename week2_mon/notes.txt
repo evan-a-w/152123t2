@@ -1,3 +1,52 @@
 Week 2
 
 https://github.com/evan-a-w/152123t2
+https://github.com/insou22/mipsy
+https://cgi.cse.unsw.edu.au/~cs1521/23T2/resources/mips-guide.html
+
+Registers
+
+int x = 0;
+x += 1;
+
+# x is in $t0
+li   $t0, 0
+add  $t0, $t0, 1
+
+
+32 registers, $0..$31
+
+- t (temp) registers can be used for any temporary value
+- a (argument) are used for arguments
+- v (return value)
+- s (save) are ones we can't change (we learn about this later)
+- sp (stack pointer)
+
+li - load immediate - lets you put a constant into a register
+move - put the value of a different register into it
+la - load an address into a register
+
+boilerplate:
+	.text
+main:
+
+
+	# return 0;
+	li	$v0, 0
+	jr	$ra
+
+
+global variables:
+.asciiz null terminated strings
+.ascii non null terminated
+.space num_bytes
+.word a single word (int)
+
+
+loop:
+
+loop_start:
+  # check the loop condition and jump out if its not met
+
+loop_end:
+  j loop_start
