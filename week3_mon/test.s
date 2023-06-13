@@ -71,8 +71,9 @@ la   $t1, cc  # $t1 = cc = 0x10010008
 # load from the address stored in $t1
 lw   $t0, ($t1) # access memory from $t1, load from cc, $t1 = 1
 la   $t1, cc
-lw   $t0, 8($t1)
+lw   $t0, 8($t1) # load from value of $t1 + 8, $t0 = 5
 li   $t1, 8
-lw   $t0, cc($t1)
+lw   $t0, cc($t1) # value of $t1 + cc = 0x10010008 + 8, $t0 = 5
 la   $t1, cc
+	# this would die
 lw   $t0, 2($t1)
