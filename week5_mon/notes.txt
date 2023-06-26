@@ -1,0 +1,121 @@
+Number systems (binary etc.)
+
+decimal
+0-9
+
+321 = 1*10^0 + 2*10^1 + 3*10^2
+
+place values are powers of 10
+
+
+binary
+0, 1
+
+0    0     0    0
+    2^2   2^1  2^0
+
+101 = 1*2^0 + 0*2^1 + 1*2^2 = 5
+
+0b111001 = 1 + 8 + 16 + 32 = ...
+
+hexadecimal
+base 8
+16 digits
+0-9, 10=A, 11=B, ..., 15=F
+
+(prefix the number by 0x)
+0xFA = A*16^0 + F*16^1 = 10*1 + 15*16 = 250
+
+octal
+
+(prefix the number by 0)
+base 8
+0-8
+
+
+A mips word (C int) is 4 bytes/32 bits (a byte is 8 bits)
+This means its a binary number with 32 digits
+000000000000001
+
+C ints arent 4 bytes on all machines
+
+#include <stdint.h>
+
+int32_t is a signed integer with 32 bits
+signed = can be negative
+
+uint16_t is an unsigned integer with 16 bits
+unsigned = not negative = 0 or larger
+
+uint8_t max = 0b11111111 = 1+2+4+8+16+32+64+128 = 255
+256 in this type will become 0
+
+
+Bitwise operations:
+Give these two numbers, and they give a result (binary operators)
+
+& = bitwise and. Give it two numbers, sets each bit to 1 only if its 1 in both numbers
+eg. 0b101 & 0b110 = 0b100
+
+| = bitwise or. If either is one, the result is 1 (both can also be one)
+eg. 0b101 | 0b110 = 0b111
+
+^ = bitwise xor = exclusive or = either is one, but not both
+eg. 0b101 | 0b110 = 0b011
+
+Unary operators (one thing)
+~ = not = flips all the bits (0 -> 1, 1 -> 0)
+eg. ~0b101 = 0b010 (but also leading zeros will be flipped)
+eg. ~0 = 0b11111111111111111111111111111111 in C because 0 is an int
+
+int x = 1;
+int y = 2;
+x + y
+x | y
+
+
+Bit shifting:
+<< = shift left
+eg. 0b100 << 3 = 0b10000
+
+>> = shift right
+eg. 0b100 >> 2 = 0b1
+
+x << 1 = x * 2
+x << n = x * 2^n
+shift left once multiplies by 2
+shift left n times multiplies by 2^n
+analogous to how multiplying by 10 is super easy
+
+x >> 2 = x / 2
+x >> n = x / 2^n
+
+uint16_t a = 0x5555, b = 0xAAAA, c = 0x0001;
+a = 0b0101010101010101
+b = 0b1010101010101010
+c = 0b0000000000000001
+
+a | b (bitwise OR)  0b1111111111111111
+a & b (bitwise AND) 0b0000000000000000
+a ^ b (bitwise XOR) 0b1111111111111111
+a & ~b (bitwise AND) = a & a = a
+c << 6 (left shift)
+a >> 4 (right shift)
+a & (b << 1)
+b | c
+a & ~c
+
+
+0th bit is place value one 0b0001
+                                ^
+
+32 bit number, the highest bit is bit 31
+
+
+how would we set the 15th bit in a number x to be 1
+We can use |
+0b00000000010000000
+           ^
+
+1 << 1 = 0b10 we have a single one in the 1st index
+1 << n = a number with a one set in the nth index
