@@ -1,0 +1,66 @@
+Bits!!!
+
+Decimal
+0-9
+
+1   2   3   4   5
+      100  10   1
+     10^2 10^1 10^0
+
+5 * 1 + 4 * 10 + 3 * 100 + ...
+
+Binary
+0, 1
+
+1      0            1        0
+      2^2         2^1       2^0
+
+0*1 + 1*2 + 0*4 + 1*8
+
+
+0b011 = 3
+
+0b101 = 5
+
+Octal
+0-7
+
+0777 = 7 * 1 + 7 * 8 + 7 * 64
+
+Hexadecimal
+16 digits
+0-9 A, B, C, D, E, F
+A = 10
+...
+F = 15
+
+0xFF
+
+0x102 = 2*1 + 0*16 + 1*16^2
+
+
+word is 32 bits
+0b11111111111111111111111111111111 max 32 bit number
+0b00000000000000000000000000000001
+0x00000001
+
+16=2^4
+
+1 hex digit is 4 bits
+
+int x = -1;
+unsigned int x = 0;
+
+||
+&&
+
+|  or  if either bit is 1, its 1, otherwise 0
+& and  if both are 1 its 1, otherwise 0
+^ xor  if exactly one of the two bits are 1, then 1, otherwise 0
+
+~ not  ~x. flips all the bits (0 -> 1, 1 -> 0)
+
+<< shift left
+<< shift right
+
+check if 15th bit of x is a 0 or a 1 (like x[15] if x were an array)
