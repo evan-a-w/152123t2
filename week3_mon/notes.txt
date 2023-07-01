@@ -1,0 +1,25 @@
+Memory!
+
+Alignment:
+
+If we're to access memory of a certain size,
+the address has to be divisible by that size.
+
+If we load or store a word from/to memory,
+the address has to be a multiple of the size of a word.
+address must be divisible by 4
+
+If we store a byte to memory, it can be any address because a byte
+is size 1
+
+
+.align x makes sure the next address is aligned to 2^x
+.align 1 makes the next address divisible by 2^1 = 2
+.align 2 makes the next address divisible by 2^2 = 4
+
+
+lw (load word)
+sw (store word)
+
+
+array[i] = array + i * (element size)

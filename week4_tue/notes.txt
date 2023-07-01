@@ -1,0 +1,85 @@
+jal label
+
+changes $ra to the next instruction
+jumps to the label
+
+jr $ra -> return to where you were called
+
+
+  jal function
+  li  ... <- ra
+
+
+function:
+  push $ra # save it at the top of the stack
+  # push $ra puts the value in $ra at the top of the stack
+  ...
+
+  li $t0, 0
+  jal another_function # changes ra
+  # $t0 might not be 0 anymore (we have to assume its changed)
+
+  pop $ra
+  # pop $ra takes the value off the top of the stack, and puts in $ra
+
+  jr $ra
+
+stack is a region of memory
+it is pointed to by $sp
+If we want to add something, we decrement $sp and store the thing in that location
+
+
+Function calling convention:
+- $a0 is the first, then $a1, etc.
+- $v0 is the first return...
+- $s registers cannot be changed by a functions
+- assume that all other registers like t... have changed
+
+--------------------------------------
+
+function:
+  push $ra # save it at the top of the stack
+  push $s0
+  # push $ra puts the value in $ra at the top of the stack
+  ...
+
+  li $s0, 0
+  jal another_function # changes ra
+  # $s0 should still be 0 because of calling conventions
+  # BUT we are not allowed to change $s0
+
+  pop $ra
+  # pop $ra takes the value off the top of the stack, and puts in $ra
+
+  jr $ra
+
+jal do_something == do_something();
+
+
+move $s0, 1
+jal do_something
+-- $ra = this point = the address 2
+
+                       1
+            2          2          2
+----      -----      -----      -----      -----
+          $s0=1      $s0=0      $s0=1      $s0=1
+                     $ra=5      $ra=5      $ra=2
+
+
+push $s0 ==
+  add  $sp, $sp, -4
+  sw   $s0, ($sp)
+
+pop  $s0 ==
+  lw  $s0, ($sp)
+  add $sp, $sp, 4
+
+
+A leaf function does not call another function
+
+When to push:
+- A non leaf function (a function that uses jal) must push/pop $ra
+- push/pop all $s registers that you use
+  - if we rely on a value staying the same after jal, we must use an $s register
+  for that value

@@ -1,0 +1,46 @@
+[jal label] (where label is a function)
+
+jumps to label and also changes $ra to point to the next instruction
+
+functions return with [jr $ra] (jumps to the address in $ra)
+
+
+Leaf functions are functions that don't call other functions
+
+A non leaf function must save $ra and restore at the end (through push and pop)
+
+Changing a register is clobbering the register
+
+Some registers we are not meant to clobber
+- $ra
+- $sX (save registers)
+
+When we call a function and we come back, we can't rely on $t, $v and $a registers
+staying the same.
+
+li      $t0, 0
+jal     func
+# now we dont what $t0 is - it might not be 0
+
+WE HAVE TO ENSURE THIS OURSELVES
+
+All the function call rules:
+- push in prologue (start), pop in epilogue (end)
+- push $ra if we use jal
+- push all the $s registers we use
+  - alternatively, push before jal, pop right after
+- never rely on any other registers staying the same after jal
+- DONT try to avoid these rules by eg. not using particular t registers in
+  certain functions
+
+Stack is just an area of memory
+The pointer to the stack is stored in $sp
+The stack grows down
+
+push $reg =
+  add  $sp, $sp, (-4)
+  sw   $reg, ($sp)
+
+pop  $reg =
+  lw   $reg, ($sp)
+  add  $sp, $sp, 4
