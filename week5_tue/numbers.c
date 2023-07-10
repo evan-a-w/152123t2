@@ -86,12 +86,13 @@ uint32_t reset_15th_bit(uint32_t x) {
 }
 
 // get the 14th to 17th bits
-// 0b00000000000000100100000000000001
+// 0b00111100000000100100000000000001
 uint32_t get_14th_to_17th_bits(uint32_t x) {
-    uint32_t _one_in_14th_to_17th_spots = 0b00000000111100000000000000;
+    /* uint32_t _one_in_14th_to_17th_spots = 0b00000000111100000000000000; */
     uint32_t one_in_14th_to_17th_spots = 0xf << 14;
     // 0b1111 == 15 == 0xF
     return (x & one_in_14th_to_17th_spots) >> 14;
+    // the bits in 0-3 are the 14-17 bits in x, the rest is 0
     // gives us 0b1001
 }
 

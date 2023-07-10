@@ -1,0 +1,144 @@
+Two's complement
+
+-101101010
+
+76543210
+1
+0
+
+1
+00000001
+-1
+11111111
+
+-x = ~x + 1
+
+00000001 = 1
+11111110 = ~1
+11111111 = ~1 + 1 = -1
+
+11111111
+00000000
+00000001
+
+1 + (-1) == 0
+
+int8_t x = -1;
+11111111
+
+int32_t y = x;
+
+WHAT WE MIGHT EXPECT
+00000000000000011111111 => y = 255 which is bad
+
+WHAT ACTUALLY HAPPENS - sign extending
+11111111111111111111111 => y = -1 which is the same
+
+int32_t z = -1;
+11111111111111111111111
+
+
+5
+0000000000000101
+
+-5
+1111111111111011
+
+Floating point
+
+scientific notation
+
++-1.dec * 10^pow
+
+
+1240 = 1.24 * 10^3
+
+0.0001240 = +1.24 * 10^-4
+
++-1.dec * 2^pow
+
+
++-1.dec * 2^(pow - 127)
+
+(-1)^0 = 1
+(-1)^1 = -1
+
+(-1)^sign * 1.dec * 2^(pow - 127)
+
+1.24
+= 1 + 0.24
+= 1 + 24 * 10^-2
+
+dec is a 23 bit unsigned number
+(-1)^sign * (1 + decimal * 2^-23) * 2^(exponent - 127)
+
+
+1.20000000
+
+20000000 * 10^-8
+(8 digit number needs to be shifted 8 times to the right to be in the decimal place)
+
+decimal is always a 23 bit (digit) number
+shifting that to the right 23 times puts it in the decimal place
+
+doubles are 64 bits
+floats are 32 bits
+^ we talk about float
+
+
+1.10110
+10110 = 22
+
+
+          2^(-1)
+000000000.000000000
+
+
+
+the format of a binary32 (float) number
+
+s = sign
+e = exponent
+f = fraction/decimal
+
+seeeeeeeefffffffffffffffffffffff
+
+(-1)^sign * (1 + fraction * 2^-23) * 2^(exponent - 127)
+
+
+https://en.wikipedia.org/wiki/Single-precision_floating-point_format
+
+table for NaN, infinity, zero
+
+
+s exponent             fraction
+0 00000000 00000000000000000000000 = +0 (special case)
+
+IF IT WASNT SPECIAL CASE:
+(-1)^0 * (1 + 0 * 2^-23) * 2^(0 - 127)
+= 2^(-127)
+
+1 00000000 00000000000000000000000 = -0
+
+0 01111111 10000000000000000000000
+0      127                    2^22
+
+(-1)^0 * (1 + 2^22 * 2^-23) * 2^(127 - 127)
+= 1 + 2^22 * 2^-23
+= 1 + 2^-1
+= 1 + 1/2
+= 1.5
+
+0 01111110 00000000000000000000000
+
+0 01111110 11111111111111111111111
+^
+exponent = 126
+fraction = 8388607
+0.99999994039
+
+0 10000000 01100000000000000000000
+
+0 10010100 10000000000000000000000
+
+0 01101110 10100000101000001010000
