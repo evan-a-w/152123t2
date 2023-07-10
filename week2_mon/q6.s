@@ -35,3 +35,11 @@ medium_string:
 	.asciiz "medium\n"
 small_big_string:
 	.asciiz "small/big\n"
+
+.byte	1
+	.align	2
+# address is now divisible by 2^2
+.word	1
+
+	sw	address, 1
+	sb	address, 1

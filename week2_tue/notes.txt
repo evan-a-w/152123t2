@@ -1,0 +1,39 @@
+MIPS!!!
+
+------------ registers ----------------
+
+int x
+machine word - 4 bytes/32 bits
+$0 .. $31
+
+- v (value) registers. used for syscalls, return value
+- a (argument) registers - used for functions and syscalls
+- t (temp) registers - used anyway, generally to store local variables
+- ra (return address)
+
+---------------- syscalls ------------
+the way we can talk to the system
+(these are basically functions)
+
+- they look at what's in $v0
+- maybe they look at $a0, ...
+- they do something
+
+```
+# li is load immediate
+li     $v0, 11
+li     $a0, '\n'
+syscall
+
+li     $v0, 5
+syscall
+# in $v0 will an int that was read in
+```
+
+li - load a constant into a register
+move $a, $b - this sets $a to be the value in $b - $a = $b
+la - loads an address into a register
+
+------------- data --------------
+
+control flow
