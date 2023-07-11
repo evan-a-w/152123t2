@@ -1,0 +1,104 @@
+Two's complement
+
+-1111111110000000001011100
+
+-x = ~x + 1
+
+8 bit twos complement
+
+x      = 00000001 = 1
+~x     = 11111110
+~x + 1 = 11111111 = -1
+
+1 + (-1) = 0
+
+00000001
+11111111
+00000000
+
+2^8 - x
+x + (2^8 - x) =
+2^8 = 0 because of overflow
+
+int8_t x = -1;
+11111111
+
+int32_t y = x;
+11111111111111111111111111111111
+00000000000000000000000011111111 = 255
+
+we sign extend numbers when casting it to a bigger size
+sign extend because we extend with the highest bit
+
+Floating point
+
+scientific notation
+
++-1.dddd * 10^eeee
+
+
+1234 = 1.234 * 10^3
+0.1234 = 1.234 * 10^(-1)
+
+
++-1.fraction * 2^exponent
+
+   2^2  2^1   2^0    2^(-1)
+1   0   1     0   .    1
+
+
+sign = 0 if pos
+sign = 1 if neg
+(-1)^sign * 1.fraction * 2^exponent
+
+
+seeeeeeeefffffffffffffffffffffff
+
+bias = 127
+(-1)^sign * (1 + fraction * 2^(-23)) * 2^(exponent - 127)
+
+
+1234 -> * 10^-4
+
+c float = 32 bits with this format (single precision)
+double precision = 64 bits (same idea, different number of bits put to different parts)
+c double ^
+
+
+s eeeeeeee fffffffffffffffffffffff
+0 00000000 00000000000000000000000
+(-1)^0 * (1 + 0 * 2^(-23)) * 2^(0 - 127)
+= 2^(-127)
+
+actually = +0
+
+
+special cases:
++-zero, +-infinity, NaN
+
+0 01111111 10000000000000000000000
+sign     = 0
+exponent = 127
+fraction = 2^22
+(-1)^0 * (1 + 2^22 * 2^(-23)) * 2^(127 - 127)
+= 1 * (1 + 2^(-1)) * 2^0
+= 1 + 1/2
+= 1.5
+
+0 01111110 11111111111111111111111
+exponent = 126
+fraction = 2^23 - 1 = 8388607
+sign = 0
+
+1 << 23 = 2^23
+100000000000000000000000
+
+x << 23 = x * 2^23
+
+(1 << n) - 1 gives us n 1s in a row
+
+(1 + 8388607 * 2^(-23)) * 2^(-1)
+= 0.99999994039
+
+
+0 11111110 11111111111111111111111
