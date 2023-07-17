@@ -41,3 +41,70 @@ syscalls:
 - read
 - open
 - write
+
+
+
+users groups public
+user that owns the file,
+part of the group that owns the file,
+public is everyone else
+
+
+permissions
+1. can you read it
+2. can you write to it
+3. can you execute it
+
+3 bits
+1 bit for read, 1 for write, one for execute
+
+0b111 - all perms
+0b001 - read only
+0b010 - write only
+0b100 - execute only
+
+3 * 3 = 9 bits of info total (there is also some other stuff, eg. whether its a directory)
+
+mode = the number that stores this permissions stuff
+
+one octal digit is 3 bits
+=> 3 digit octal number represents all the permissions
+
+octal
+0700
+
+      xwr
+7 = 0b111
+0 = 0b000
+
+ ugp
+0700 = 0b111000000
+user has rwx, group has nothing, public has nothing
+
+ u  g  p
+drwxrwxrwx - permission string
+ 111111111
+
+-rwx------
+ 111000000 = first 9 bits of mode
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+S_ISDIR(mode) returns true if its a directory
+
+if (S_ISDIR(mode)) {
+// directory
+} else {
+// not
+}
+
+int is_regular_file(const char *path)
+{
+    struct stat path_stat;
+    stat(path, &path_stat);
+    return S_ISREG(path_stat.st_mode);
+    // S_ISDIR etc.
+    // st_mode is the mode number
+}
