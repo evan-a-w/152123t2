@@ -1,0 +1,43 @@
+Week 8 monday
+
+
+FILE *
+
+stdout -- printf writes to stdout
+stdin  -- scanf reads from stdin
+
+fprintf
+fscanf
+
+printf(...) = fprintf(stdout, ...)
+scanf(...) = fscanf(stdin, ...)
+
+fgets - read line from stdin
+
+
+
+FILE *fopen("../file.txt", permissions)
+permissions:
+- "r" read from file
+   - fails if the file doesnt exist
+- "w" write to a file (from the beginning - replace the contents)
+   - creates if not exist
+- "a" write to file but from the end (append)
+- "w+" or "r+" read and write.
+   -  w+ creates it if it doesnt exist
+
+opening a file can fail
+
+we want to handle these errors
+
+commonly we just
+- print out an error and end the program
+
+
+FILE * is a wrapper around an operating system file descriptor, which is just a number
+fopen calls the open syscall which will a file descriptor
+
+syscalls:
+- read
+- open
+- write
