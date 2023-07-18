@@ -1,0 +1,105 @@
+Files
+
+FILE *
+
+printf writes to stdout
+scanf reads from stdin
+
+
+fprintf(FILE *out, ...)
+
+printf(...) = fprintf(stdout, ...)
+
+
+FILE *fopen(path, mode_string)
+mode_string can be
+- "r" opens from the beginning of the file for reading
+   - doesn't create the file if it doesn't exist
+- "w" (write) opens from the beginning to write
+   - does create the file
+   - overwrite existing contents
+- "a" (append) opens from the end of the file to write
+- "w+" read and write, creates if not exist
+- "r+" read and write, doesn't create
+
+on error, NULL is returned (can check that)
+
+errno is set
+
+errno is a global variable that indicates the previous error in std functions
+- eg. will store whether the reason for failure was that a file doesn't exist
+
+perror(char *) prints an error message based on errno
+- prints to stderr
+
+stderr is different to stdout
+
+printf("We had an error!")
+
+- always print to stderr for error messages
+
+fprintf(stderr, "We had an error!")
+
+
+fseek lets us move to different positions in the file
+
+int fseek(FILE *stream, long offset, int whence);
+
+whence
+- SEEK_SET moves exactly to offset
+- SEEK_CUR moves current position + offset
+- SEEK_END moves end of file + offset
+
+can error - cant move to a negative position
+can move beyond the current end of the file
+
+fseek(stream, 10000000000000, SEEK_END) - works
+- file will be really big BUT there actually isnt much stored on the disk
+
+
+Syscalls
+file descriptor - number that refers to some data in the operating system about
+a file you opened
+
+- read syscall which takes a file descriptor and a buffer and reads to the buffer
+- write syscall which takes a file descriptor and a buffer and writes to the file
+- lseek syscall which does the fseek stuff
+
+operating system handles these syscalls
+
+
+
+Permissions:
+
+3 types
+user (owner)
+groups (member of a group that owns the file)
+public (anyone else)
+
+dir user  group public
+d   rwx   rwx   rwx
+XXX 111   111   111
+    007   007   007
+
+-   rwx   r-x   ---
+XXX 111   101   000
+    007   005   000
+
+
+0b000 - no perms
+0b001 - execute
+0b010 - write
+0b100 - read
+
+hex digit = 4 bits
+octal digit = 3 bits
+
+
+0777 = all perms for all groups
+0750 = -rwxr-x---
+
+
+0664 = 0b110110100
+         rw-rw-r--
+
+st_mode, first 9 bits are these perms
