@@ -91,7 +91,7 @@ XXX 111   101   000
 0b010 - write
 0b100 - read
 
-hex digit = 4 bits
+hex digit = 4 bit s
 octal digit = 3 bits
 
 

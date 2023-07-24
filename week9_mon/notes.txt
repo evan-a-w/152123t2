@@ -1,0 +1,51 @@
+Permissions:
+
+3 levels of permissions
+user (if you are the user that owns the file)
+group perm (if you are a member of the group that owns the file)
+public (if you're not one of the other groups)
+
+
+3 things you can do
+- read
+  - for directories means you can read whats in it
+- write
+- execute
+  - you can cd into it (and read whats in it)
+
+
+user group public
+rwx  rwx   rwx
+r-x  ---   ---
+
+only users can read and execute, others have no perms
+
+
+mode has 9 bits that indicate this stuff
+
+  rwxrwxrwx
+0b111111111
+0b000000010
+
+  rwxr-x---
+0b111101000
+
+hex digit is 4 bits
+octal digit is 3 bits
+
+111 = 7
+100 = 4
+001 = 1
+
+
+  rwxrwxrwx
+0   7  7  7
+
+  rwxr-x---
+0   7  5  0
+
+
+lower order 9 bits of st_mode are these permissions
+there are also some bits that indicate some other info like if its a directory
+
+S_ISDIR(st_mode) (true if directory)
